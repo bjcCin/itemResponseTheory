@@ -2,14 +2,18 @@ install.packages("ltm")
 
 library("ltm")
 
-colnumber <- ncol(X1math_dichotomic_responses)
-data <- X1math_dichotomic_responses[2:colnumber]
+colnumber <- ncol(X2math_dichotomic_responses)
+data <- X2math_dichotomic_responses[2:colnumber]
 
 
 ML3 <- tpm(data, IRT.param = TRUE)
 coef.tpm(ML3)
 
 summary(PL3)
+
+pp_map <- factor.scores(ML3, method = "EB", resp.patterns = data)
+tmp1 <- data.frame(MAP = pp_map$score.dat$z1)
+tmp1
 
 plot(ML3)
 plot(ML3, type = "ICC", legend = TRUE)
